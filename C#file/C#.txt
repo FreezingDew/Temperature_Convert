@@ -1,0 +1,101 @@
+using System;
+
+        namespace Utmaning1
+        {
+            class Program
+            {
+                // Main method run at start.
+                static void Main(string[] args)
+                {
+                    // Run the method converter
+                    Converter();
+                }
+
+                // Calculates the temperature in Fahrenheit from the double passed as argument
+                static double CelsiusToFahrenheit(double temp)
+                {
+                    return temp * 1.8 + 32;
+                }
+
+                // Calculates the temperature in Celsius from the double passed as argument
+                static double FahrenheitToCelsius(double temp)
+                {
+                    return (temp - 32) / 1.8;
+                }
+
+                // This method tells user what to do and detects the input of the temperature to convert
+                static void Converter()
+                {
+                    // Clear console window
+                    Console.Clear();
+                    // Tell user what to do
+                    Console.WriteLine("Welcome. Choose what unit to enter the temperature in c/f");
+
+                    // Detect the key user presses
+                    var input = Console.ReadKey();
+                    
+                    // User did press 'C' and wants to enter the temperature in celsius
+                    if(input.Key == ConsoleKey.C)
+                    {
+                        // Clear the window
+                        Console.Clear();
+                        // Print message to user
+                        Console.WriteLine("Enter temperature in celsius:");
+
+                        // Now we detect the user input and try to convert the input string to a double vaiable
+                        try
+                        {
+                            Console.WriteLine(CelsiusToFahrenheit(Convert.ToDouble(Console.ReadLine())));
+                        }
+
+                        // If the input couldn't be converted to double, display the error message
+                        catch (Exception)
+                        {
+                            ErrorMessage();
+                        }
+                    }
+
+                    // User did press 'F' and wants to enter the temperature in fahrenheit
+                    else if (input.Key == ConsoleKey.F)
+                    {
+                        // Clear the window
+                        Console.Clear();
+                        // Print message to user
+                        Console.WriteLine("Enter temperature in fahrenheit:");
+
+                        // Now we detect the user input and try to convert the input string to a double vaiable
+                        try
+                        {
+                            Console.WriteLine(FahrenheitToCelsius(Convert.ToDouble(Console.ReadLine())));
+                        }
+
+                        // If the input couldn't be converted to double, display the error message
+                        catch (Exception)
+                        {
+                            ErrorMessage();
+                        }
+                    }
+
+                    // User have pressed a key that is not C or F, and that is not valid. Display error message.
+                    else
+                    {
+                        ErrorMessage();
+                    }
+
+                    // Convertion done. Tell user to press enter to enter a new temperature
+                    Console.WriteLine("Press enter to enter another temperature to convert.");
+                    // Detect the Enter key getting pressed
+                    Console.ReadLine();
+                    // Run the converter method again.
+                    Converter();
+                }
+
+                // Method that displays an Error message and awaits user pressing Enter
+                static void ErrorMessage()
+                {
+                    Console.WriteLine("Invalid input. Press enter to try again");
+                    Console.ReadLine();
+                    Converter();
+                }
+            }
+        }
